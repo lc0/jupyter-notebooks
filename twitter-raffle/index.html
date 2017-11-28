@@ -1,8 +1,64 @@
+
 <!DOCTYPE html>
 <html>
-<head><meta charset="utf-8" />
-<title>raffle</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<title>raffle slides</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- General and theme style sheets -->
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+}
+
+</script>
+
+<!--[if lt IE 9]>
+<script src="reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+<!-- Loading the mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+
+<!-- Get Font-awesome from cdn -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
 
 <style type="text/css">
     /*!
@@ -11718,149 +11774,86 @@ ul.typeahead-list > li > a {
 
 <style type="text/css">
 /* Overrides of notebook CSS for static HTML export */
-body {
-  overflow: visible;
-  padding: 8px;
+.reveal {
+  font-size: 160%;
+  overflow-y: scroll;
 }
-
-div#notebook {
-  overflow: visible;
-  border-top: none;
+.reveal pre {
+  width: inherit;
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace, sans-serif;
+  font-size: 80%;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 }
-
-@media print {
-  div.cell {
-    display: block;
-    page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
-  }
-  div.output { 
-    display: block;
-    page-break-inside: avoid; 
-  }
+.reveal pre code {
+  padding: 0px;
+}
+.reveal section img {
+  border: 0px solid black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+}
+.reveal i {
+  font-style: normal;
+  font-family: FontAwesome;
+  font-size: 2em;
+}
+.reveal .slides {
+  text-align: left;
+}
+.reveal.fade {
+  opacity: 1;
+}
+.reveal .progress {
+  position: static;
+}
+div.input_area {
+  padding: 0.06em;
+}
+div.code_cell {
+  background-color: transparent;
+}
+div.prompt {
+  width: 11ex;
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace, sans-serif;
+  font-size: 80%;
+  text-align: right;
+}
+div.output_area pre {
+  font-family: monospace, sans-serif;
+  font-size: 80%;
+}
+div.output_prompt {
+  /* 5px right shift to account for margin in parent container */
+  margin: 5px 5px 0 0;
+}
+div.text_cell.rendered .rendered_html {
+  /* The H1 height seems miscalculated, we are just hidding the scrollbar */
+  overflow-y: hidden;
+}
+a.anchor-link {
+  /* There is still an anchor, we are only hidding it */
+  display: none;
+}
+.rendered_html p {
+  text-align: inherit;
 }
 </style>
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
-<!-- Loading mathjax macro -->
-<!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-    </script>
-    <!-- End of mathjax configuration --></head>
+</head>
+
+
 <body>
-  <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[198]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>pip install twitterscraper
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
 
 
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Requirement already satisfied: twitterscraper in ./venv/lib/python2.7/site-packages
-Requirement already satisfied: bs4 in ./venv/lib/python2.7/site-packages (from twitterscraper)
-Requirement already satisfied: requests in ./venv/lib/python2.7/site-packages (from twitterscraper)
-Requirement already satisfied: lxml in ./venv/lib/python2.7/site-packages (from twitterscraper)
-Requirement already satisfied: fake-useragent in ./venv/lib/python2.7/site-packages (from twitterscraper)
-Requirement already satisfied: coala-utils~=0.5.0 in ./venv/lib/python2.7/site-packages (from twitterscraper)
-Requirement already satisfied: beautifulsoup4 in ./venv/lib/python2.7/site-packages (from bs4-&gt;twitterscraper)
-Requirement already satisfied: certifi&gt;=2017.4.17 in ./venv/lib/python2.7/site-packages (from requests-&gt;twitterscraper)
-Requirement already satisfied: chardet&lt;3.1.0,&gt;=3.0.2 in ./venv/lib/python2.7/site-packages (from requests-&gt;twitterscraper)
-Requirement already satisfied: idna&lt;2.7,&gt;=2.5 in ./venv/lib/python2.7/site-packages (from requests-&gt;twitterscraper)
-Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2.7/site-packages (from requests-&gt;twitterscraper)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[199]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">twitterscraper</span> <span class="kn">import</span> <span class="n">query_tweets</span>
-
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
-
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-
-<span class="k">def</span> <span class="nf">gen_link</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;https://twitter.com/{user}/status/{id}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">tweet</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">get_embedd</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">tweet_id</span><span class="p">):</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://publish.twitter.com/oembed?url=https://twitter.com/{user}/status/{tweet_id}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">tweet_id</span><span class="o">=</span><span class="n">tweet_id</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">print_tweets</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="n">top_n</span><span class="p">,</span> <span class="n">starting</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">embedds</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    
-    <span class="n">end</span> <span class="o">=</span> <span class="n">top_n</span>
-    <span class="k">if</span> <span class="n">starting</span><span class="p">:</span>
-        <span class="n">end</span> <span class="o">+=</span> <span class="n">starting</span>
-        
-    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">[</span><span class="n">starting</span><span class="p">:</span><span class="n">end</span><span class="p">]:</span>
-        <span class="n">user</span><span class="o">=</span><span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span>
-        
-        <span class="k">if</span> <span class="n">embedds</span><span class="p">:</span>
-            <span class="n">tweet_id</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;tweet_id&#39;</span><span class="p">]</span>
-            <span class="n">embedd</span> <span class="o">=</span> <span class="n">get_embedd</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">tweet_id</span><span class="p">)</span>
-            
-            <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">embedd</span><span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">]))</span>
-        
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{score} - {link} - {user}:</span><span class="se">\n</span><span class="s2"> {text}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                  <span class="n">score</span><span class="o">=</span><span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">],</span>
-                  <span class="n">text</span><span class="o">=</span><span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">],</span>
-                  <span class="n">user</span><span class="o">=</span><span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span>
-                  <span class="n">link</span><span class="o">=</span><span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;link&#39;</span><span class="p">],))</span>
-    
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
+<div class="reveal">
+<div class="slides">
+<section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11870,7 +11863,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11880,7 +11873,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11890,7 +11883,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11899,7 +11892,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 <h2 id="Getting-data">Getting data<a class="anchor-link" href="#Getting-data">&#182;</a></h2>
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11909,7 +11902,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 
 </div>
 </div>
-</div>
+</div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[200]:</div>
@@ -11922,7 +11915,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 </div>
 </div>
 
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[201]:</div>
@@ -11953,32 +11946,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[202]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">processed</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">def</span> <span class="nf">calculate_score</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">retweets</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">likes</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
-        
-    <span class="n">processed</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
-                      <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="n">calculate_score</span><span class="p">(</span><span class="n">tweet</span><span class="p">),</span>
-                      <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
-                      <span class="s1">&#39;tweet_id&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-                      <span class="s1">&#39;link&#39;</span><span class="p">:</span> <span class="n">gen_link</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
-                     <span class="p">})</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[203]:</div>
@@ -11991,7 +11959,7 @@ Requirement already satisfied: urllib3&lt;1.23,&gt;=1.21.1 in ./venv/lib/python2
 </div>
 </div>
 
-</div>
+</div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[204]:</div>
@@ -12097,87 +12065,7 @@ http://goo.gl/uf4vs5 
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[205]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">print_tweets</span><span class="p">(</span><span class="n">sorted_tweets</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Watch<a href="https://t.co/wW0FfNKC8t">https://t.co/wW0FfNKC8t</a><a href="https://twitter.com/hashtag/DevFestBayern%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#DevFestBayernِ</a> <a href="https://twitter.com/hashtag/FCCVFL%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#FCCVFLِ</a> <a href="https://twitter.com/hashtag/hoertdiesignale%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#hoertdiesignaleِ</a> <a href="https://twitter.com/hashtag/le2511%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#le2511ِ</a> <a href="https://twitter.com/hashtag/FCBJHV%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#FCBJHVِ</a> <a href="https://twitter.com/hashtag/BMGFCB%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#BMGFCBِ</a> <a href="https://twitter.com/hashtag/RIPKABA%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#RIPKABAِ</a> <a href="https://twitter.com/hashtag/TheBigIssue%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#TheBigIssueِ</a> <a href="https://twitter.com/hashtag/bcsyi%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#bcsyiِ</a> <a href="https://twitter.com/hashtag/Bar4%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#Bar4ِ</a> <br>NEW MUSICِ <a href="https://twitter.com/hashtag/SConcert2017%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#SConcert2017ِ</a> <br>Emmerson Mnangagwaِ <br>King Promiseِ <br>Accraِ <br>Official Videoِ <a href="https://twitter.com/hashtag/JoyNews%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#JoyNewsِ</a></p>&mdash; niccky (@nixsj) <a href="https://twitter.com/nixsj/status/934463833787240449?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The day I had the opportunity to talk about <a href="https://twitter.com/Firebase?ref_src=twsrc%5Etfw">@Firebase</a> at two conferences in different cities. <a href="https://twitter.com/hashtag/devfest17?src=hash&amp;ref_src=twsrc%5Etfw">#devfest17</a> <a href="https://twitter.com/hashtag/devfestbayern?src=hash&amp;ref_src=twsrc%5Etfw">#devfestbayern</a> <a href="https://twitter.com/hashtag/devfesthh?src=hash&amp;ref_src=twsrc%5Etfw">#devfesthh</a> 🎒🗺️🔥 <a href="https://t.co/qrVrUQt3YJ">pic.twitter.com/qrVrUQt3YJ</a></p>&mdash; Juarez Filho #DevFestHH 🇩🇪 (@juarezpaf) <a href="https://twitter.com/juarezpaf/status/934491017398636544?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/DevFestBayern?src=hash&amp;ref_src=twsrc%5Etfw">#DevFestBayern</a> <a href="https://twitter.com/hashtag/GDG?src=hash&amp;ref_src=twsrc%5Etfw">#GDG</a> <a href="https://twitter.com/hashtag/Bavarian?src=hash&amp;ref_src=twsrc%5Etfw">#Bavarian</a>  style by <a href="https://twitter.com/lehtimaeki?ref_src=twsrc%5Etfw">@lehtimaeki</a> <a href="https://t.co/ihmSNNWygd">pic.twitter.com/ihmSNNWygd</a></p>&mdash; Wiebe Elsinga (@welsinga) <a href="https://twitter.com/welsinga/status/934338560567775232?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">watch<a href="https://t.co/LzpegIsAC4">https://t.co/LzpegIsAC4</a><a href="https://twitter.com/hashtag/BAAL%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#BAALِ</a> <a href="https://twitter.com/hashtag/SVBBFC%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#SVBBFCِ</a> <a href="https://twitter.com/hashtag/gewaltgegenfrauen%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#gewaltgegenfrauenِ</a> <a href="https://twitter.com/hashtag/dlr17%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#dlr17ِ</a> <a href="https://twitter.com/hashtag/Eggestein%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#Eggesteinِ</a> <a href="https://twitter.com/hashtag/utag17%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#utag17ِ</a> <a href="https://twitter.com/hashtag/SVWW%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#SVWWِ</a> <a href="https://twitter.com/hashtag/FSVWIE%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#FSVWIEِ</a> <a href="https://twitter.com/hashtag/SVWRWE%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#SVWRWEِ</a> <a href="https://twitter.com/hashtag/DevFestBayern%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#DevFestBayernِ</a> <a href="https://twitter.com/hashtag/FCCVFL%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#FCCVFLِ</a> <a href="https://twitter.com/hashtag/RIPKABA%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#RIPKABAِ</a> <a href="https://twitter.com/hashtag/TheBigIssue%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#TheBigIssueِ</a> <a href="https://twitter.com/hashtag/bcsyi%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#bcsyiِ</a> <a href="https://twitter.com/hashtag/Bar4%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#Bar4ِ</a> <br>NEW MUSICِ <a href="https://twitter.com/hashtag/SConcert2017%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#SConcert2017ِ</a> <br>Emmerson Mnangagwaِ</p>&mdash; mshary almgebal (@dezert1394) <a href="https://twitter.com/dezert1394/status/934466738598621184?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Watch<a href="https://t.co/dXMkValLh4">https://t.co/dXMkValLh4</a><a href="https://twitter.com/hashtag/necjaj%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#necjajِ</a> <a href="https://twitter.com/hashtag/rtl7darts%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#rtl7dartsِ</a> <a href="https://twitter.com/hashtag/sitNL%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#sitNLِ</a> <a href="https://twitter.com/hashtag/WCUT%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#WCUTِ</a> <a href="https://twitter.com/hashtag/camdbo%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#camdboِ</a> <a href="https://twitter.com/hashtag/forGAE%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#forGAEِ</a> <a href="https://twitter.com/hashtag/tweededivisie%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#tweededivisieِ</a> <a href="https://twitter.com/hashtag/weekend%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#weekendِ</a> <a href="https://twitter.com/hashtag/ajarod%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#ajarodِ</a> <a href="https://twitter.com/hashtag/kozach%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#kozachِ</a> <a href="https://twitter.com/hashtag/jvomag%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#jvomagِ</a> <a href="https://twitter.com/hashtag/gencsv%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#gencsvِ</a> <a href="https://twitter.com/hashtag/NST_PO%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#NST_POِ</a> <a href="https://twitter.com/hashtag/mvvhel%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#mvvhelِ</a> <a href="https://twitter.com/hashtag/rtlln%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#rtllnِ</a> <a href="https://twitter.com/hashtag/devFestBayern%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#devFestBayernِ</a> <a href="https://twitter.com/hashtag/spihar%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#spiharِ</a> <a href="https://twitter.com/hashtag/rvvnoo%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#rvvnooِ</a> <a href="https://twitter.com/hashtag/hoeste%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#hoesteِ</a> <a href="https://twitter.com/hashtag/OlimpikShakhtar%D9%90?src=hash&amp;ref_src=twsrc%5Etfw">#OlimpikShakhtarِ</a></p>&mdash; Z~otb (@fssle8) <a href="https://twitter.com/fssle8/status/934510658820935680?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[206]:</div>
@@ -12195,7 +12083,7 @@ http://goo.gl/uf4vs5 
 </div>
 </div>
 
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[207]:</div>
@@ -12208,7 +12096,7 @@ http://goo.gl/uf4vs5 
 </div>
 </div>
 
-</div>
+</div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[208]:</div>
@@ -12256,87 +12144,7 @@ http://goo.gl/uf4vs5 
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[209]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">print_tweets</span><span class="p">(</span><span class="n">filtered_tweets</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">embedds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I love persistence talks because POJO sounds like chicken in spanish <a href="https://twitter.com/hashtag/DevFestBayern?src=hash&amp;ref_src=twsrc%5Etfw">#DevFestBayern</a></p>&mdash; Fernandroid (@ferdy182) <a href="https://twitter.com/ferdy182/status/934368880247570432?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I agree... You have to do, not just think about doing... <a href="https://twitter.com/hashtag/DEVFESTBAYERN?src=hash&amp;ref_src=twsrc%5Etfw">#DEVFESTBAYERN</a> <a href="https://t.co/Byrzqk4KWa">pic.twitter.com/Byrzqk4KWa</a></p>&mdash; Daniel Eyring (@eyring_dotcom) <a href="https://twitter.com/eyring_dotcom/status/934366776019832832?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Very fitting end to the Hitchhiker&#39;s guide to tensorflow <a href="https://twitter.com/lc0d3r?ref_src=twsrc%5Etfw">@lc0d3r</a> <a href="https://twitter.com/hashtag/devfestBayern?src=hash&amp;ref_src=twsrc%5Etfw">#devfestBayern</a> <a href="https://twitter.com/hashtag/GDG?src=hash&amp;ref_src=twsrc%5Etfw">#GDG</a> <a href="https://t.co/aLs9qFB4Yo">pic.twitter.com/aLs9qFB4Yo</a></p>&mdash; Nithish R (@nithishr) <a href="https://twitter.com/nithishr/status/934424255198089217?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">.<a href="https://twitter.com/botteaap?ref_src=twsrc%5Etfw">@botteaap</a> talking about Room at <a href="https://twitter.com/hashtag/DevFestBayern?src=hash&amp;ref_src=twsrc%5Etfw">#DevFestBayern</a> <a href="https://t.co/qayoAC3dA6">pic.twitter.com/qayoAC3dA6</a></p>&mdash; Wolfram Rittmeyer (@RittmeyerW) <a href="https://twitter.com/RittmeyerW/status/934364334318391297?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
-
-
-<div class="output_html rendered_html output_subarea ">
-<blockquote class="twitter-tweet"><p lang="de" dir="ltr">Per Anhalter durch Tensorflow; Vortrag zu Maschinelles Lernen von Khomenko, Sergii <a href="https://twitter.com/lc0d3r?ref_src=twsrc%5Etfw">@lc0d3r</a> Heute in München bei Google Developers Group <a href="https://twitter.com/hashtag/GDG?src=hash&amp;ref_src=twsrc%5Etfw">#GDG</a> <a href="https://twitter.com/hashtag/DevFestBayern?src=hash&amp;ref_src=twsrc%5Etfw">#DevFestBayern</a> <a href="https://twitter.com/gdgmunich?ref_src=twsrc%5Etfw">@gdgmunich</a> <a href="https://twitter.com/gdg?ref_src=twsrc%5Etfw">@gdg</a> <a href="https://t.co/7TFM73jktG">pic.twitter.com/7TFM73jktG</a></p>&mdash; ɔıʌoʞuɐʌı ɐuɐzns 🔺 (@suzisahne) <a href="https://twitter.com/suzisahne/status/934429803649826816?ref_src=twsrc%5Etfw">November 25, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12346,7 +12154,7 @@ http://goo.gl/uf4vs5 
 
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[210]:</div>
@@ -12378,7 +12186,7 @@ http://goo.gl/uf4vs5 
 </div>
 </div>
 
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[211]:</div>
@@ -12410,12 +12218,63 @@ http://goo.gl/uf4vs5 
 </div>
 </div>
 
+</div></section></section>
 </div>
-    </div>
-  </div>
-</body>
+</div>
 
- 
+<script>
+
+require(
+    {
+      // it makes sense to wait a little bit when you are loading
+      // reveal from a cdn in a slow connection environment
+      waitSeconds: 15
+    },
+    [
+      "reveal.js/lib/js/head.min.js",
+      "reveal.js/js/reveal.js"
+    ],
+
+    function(head, Reveal){
+
+        // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: "reveal.js/lib/js/classList.js",
+                  condition: function() { return !document.body.classList; } },
+                { src: "reveal.js/plugin/notes/notes.js",
+                  async: true,
+                  condition: function() { return !!document.body.classList; } }
+            ]
+        });
+
+        var update = function(event){
+          if(MathJax.Hub.getAllJax(Reveal.getCurrentSlide())){
+            MathJax.Hub.Rerender(Reveal.getCurrentSlide());
+          }
+        };
+
+        Reveal.addEventListener('slidechanged', update);
+
+        var update_scroll = function(event){
+          $(".reveal").scrollTop(0);
+        };
+
+        Reveal.addEventListener('slidechanged', update_scroll);
+
+    }
+);
+</script>
+
+</body>
 
 
 </html>
